@@ -6,6 +6,10 @@ namespace Tombokdoga
     {
         static string[] huto = new string[10];
 
+        static int[] szamok = new int[10];
+
+        static Random r = new Random();
+
         static int Takarit()
         {
             int j = 0;
@@ -24,19 +28,26 @@ namespace Tombokdoga
             {
                 huto[i] = "";
             }
-            return 10 - j;
+            return j;
         }
 
         static int KeresEtel(string etelNeve)
         {
-            for (int i = 0; i < 10; i++)
+            int i = 0;
+
+            while (i < 10 && huto[i] != etelNeve)
             {
-                if (huto[i] == etelNeve)
-                {
-                    return i;
-                }
+                i++;
             }
-            return 0;
+            if ( i== 10)
+            {
+                return 0;
+            }
+            else
+            {
+                return i;
+            }
+
         }
 
         static void Maganhangzos()
@@ -53,6 +64,35 @@ namespace Tombokdoga
                         Console.WriteLine(huto[i]);
                     }
                 }
+            }
+        }
+
+        static void FeltoltEgyediekkel(int min, int max)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                int szam = r.Next(min, max + 1);
+                bool letezik = true;
+
+                while (letezik)
+                {
+                    letezik = false;
+
+                    for (int j = 0; j < i; j++)
+                    {
+                        if (szamok[j] == szam)
+                        {
+                            letezik = true;
+                        }
+                    }
+
+                    if (letezik)
+                    {
+                        szam = r.Next(min, max + 1);
+                    }
+                }
+
+                szamok[i] = szam;
             }
         }
 
@@ -76,8 +116,8 @@ namespace Tombokdoga
             huto[8] = "zöldség";
             huto[9] = "ananász";
 
-            Console.WriteLine($"Ennyi üres hely maradt a hűtőben: {Takarit()}");
-            Console.WriteLine($"A keresett etel indexe: {KeresEtel("steak")}");
+            Console.WriteLine($"Az élelmiszerek száma a hűtőben: {Takarit()}");
+            Console.WriteLine($"A keresett étel indexe: {KeresEtel("steak")}");
             Console.WriteLine($"A magánhangzóval kezdődő szavak száma:");
             Maganhangzos();
 
