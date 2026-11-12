@@ -80,6 +80,7 @@ namespace Tombokdoga
             Console.WriteLine($"A keresett etel indexe: {KeresEtel("steak")}");
             Console.WriteLine($"A magánhangzóval kezdődő szavak száma:");
             Maganhangzos();
+
         }
     }
 }
