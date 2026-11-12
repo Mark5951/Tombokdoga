@@ -96,6 +96,61 @@ namespace Tombokdoga
             }
         }
 
+        static int[] LeghosszabbNovekvo()
+        {
+            int max = 1;
+            int db = 1;
+            int kezdet = 0;
+
+            for (int i = 1; i < 10; i++)
+            {
+                if (szamok[i] > szamok[i - 1])
+                {
+                    db++;
+                }
+                else
+                {
+                    db = 1;
+                }
+
+                if ( db > max)
+                {
+                    max = db;
+                    kezdet = i - db + 1;
+                }
+            }
+
+            int[] uj = new int[max];
+
+            for (int i = 0; i < max; i++)
+            {
+                uj[i] = szamok[kezdet + i];
+            }
+
+            return uj;
+
+        }
+
+        static void AtlagAlattiDuplazas()
+        {
+            double osszeg = 0;
+
+            for (int i = 0; i < 10; i++)
+            {
+                osszeg += szamok[i];
+            }
+
+            double atlag = osszeg / 10;
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (szamok[i] < atlag)
+                {
+                    szamok[i] = szamok[i] * 2;
+                }
+            }
+        }
+
 
 
 
@@ -120,6 +175,34 @@ namespace Tombokdoga
             Console.WriteLine($"A keresett étel indexe: {KeresEtel("steak")}");
             Console.WriteLine($"A magánhangzóval kezdődő szavak száma:");
             Maganhangzos();
+
+            FeltoltEgyediekkel(1, 30);
+
+            Console.WriteLine("Eredeti tömb:");
+            for (int i = 0; i < szamok.Length; i++)
+            {
+                Console.WriteLine(szamok[i]);
+            }
+
+            Console.WriteLine();
+
+            int[] novekvo = LeghosszabbNovekvo();
+
+            Console.WriteLine("Leghosszabb növekvő részsorozat:");
+            for (int i = 0; i < novekvo.Length; i++)
+            {
+                Console.WriteLine(novekvo[i]);
+            }
+
+            Console.WriteLine();
+            AtlagAlattiDuplazas();
+
+            Console.WriteLine("Módosított tömb:");
+            for (int i = 0; i < szamok.Length; i++)
+            {
+                Console.WriteLine(szamok[i]);
+            }
+
 
         }
     }
